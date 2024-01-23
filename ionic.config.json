@@ -1,0 +1,7 @@
+{
+  "name": "best-online-courses",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
