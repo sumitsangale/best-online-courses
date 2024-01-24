@@ -5,6 +5,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
+import { SharedModule } from 'src/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CartComponent } from './cart/cart.component';
@@ -23,7 +24,12 @@ import { HeaderComponent } from './core/header/header.component';
     WishlistComponent,
     HeaderComponent,
   ],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

@@ -1,3 +1,146 @@
-<p>
-  profile works!
-</p>
+<ion-content>
+  <ion-grid class="profile-wrap">
+    <ion-row>
+      <ion-col size="4"> Profile-photo </ion-col>
+      <ion-col size-md="8">
+        <h4 class="ion-text-center">Public Profile</h4>
+        <form [formGroup]="profileFormGroup" class="profile-form">
+          <div class="form-fields">
+            <ion-input
+              label="Display name"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Enter Display Name"
+              type="text"
+              formControlName="displayName"
+            ></ion-input>
+            <ion-text
+              color="danger"
+              *ngIf="
+                profileFormGroup.controls['displayName'].touched &&
+                profileFormGroup.controls['displayName'].errors
+              "
+            >
+              <span>Please enter your display name</span>
+            </ion-text>
+          </div>
+          <div class="form-fields">
+            <ion-input
+              label="First name"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Enter first Name"
+              type="text"
+              formControlName="firstName"
+              alphaOnly
+            ></ion-input>
+            <ion-text
+              color="danger"
+              *ngIf="
+                profileFormGroup.controls['firstName'].touched &&
+                profileFormGroup.controls['firstName'].errors
+              "
+            >
+              <span>Please enter your first name</span>
+            </ion-text>
+          </div>
+          <div class="form-fields">
+            <ion-input
+              label="Last name"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Enter last Name"
+              type="text"
+              formControlName="lastName"
+              alphaOnly
+            ></ion-input>
+          </div>
+          <div class="form-fields">
+            <ion-textarea
+              label="About yourself (Max char 100)"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Enter text"
+              type="text"
+              formControlName="aboutText"
+              maxlength="100"
+            ></ion-textarea>
+          </div>
+          <div class="form-fields">
+            <ion-select
+              label="Area of interest"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Select area of interest"
+              [multiple]="true"
+              interface="popover"
+              formControlName="areaOfInterest"
+            >
+              <ion-select-option value="java">Java</ion-select-option>
+              <ion-select-option value="python">Python</ion-select-option>
+              <ion-select-option value="javascript"
+                >Javascript</ion-select-option
+              >
+            </ion-select>
+          </div>
+          <div class="form-fields">
+            <ion-radio-group formControlName="profession">
+              <ion-radio value="student" labelPlacement="start"
+                ><span class="ion-margin-end">Are you:</span> Student</ion-radio
+              >
+              <ion-radio
+                value="professional"
+                labelPlacement="start"
+                class="ion-margin-start"
+                >Professional</ion-radio
+              >
+            </ion-radio-group>
+          </div>
+          <div class="form-fields">
+            <ion-select
+              label="Experience"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Select experience (yr)"
+              interface="popover"
+              formControlName="experience"
+            >
+              <ion-select-option value="junior">0-5</ion-select-option>
+              <ion-select-option value="midlevel">5-10</ion-select-option>
+              <ion-select-option value="senior">10 & above</ion-select-option>
+            </ion-select>
+          </div>
+          <div class="form-fields">
+            <ion-select
+              label="Expertise"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Select expertise"
+              interface="popover"
+              formControlName="expertise"
+            >
+              <ion-select-option value="backend">Backend</ion-select-option>
+              <ion-select-option value="frontend">Frontend</ion-select-option>
+            </ion-select>
+          </div>
+          <div class="form-fields">
+            <ion-textarea
+              label="Role (Max char 200)"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Mention your role"
+              type="text"
+              formControlName="role"
+              maxlength="200"
+            ></ion-textarea>
+          </div>
+          <div class="form-fields">
+            <ion-button (click)="save()" [disabled]="profileFormGroup.invalid"
+              >Save</ion-button
+            >
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
