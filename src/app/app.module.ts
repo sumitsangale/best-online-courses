@@ -5,9 +5,10 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
-import { SharedModule } from 'src/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AppService } from './service/app.service';
+import { SharedModule } from 'src/shared/shared.module';
 import { CartComponent } from './cart/cart.component';
 import { CoursesComponent } from './courses/courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -30,7 +31,10 @@ import { HeaderComponent } from './core/header/header.component';
     IonicModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AppService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

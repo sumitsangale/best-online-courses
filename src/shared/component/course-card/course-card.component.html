@@ -1,5 +1,5 @@
-<ion-card class="course-card">
-  <ion-row class="ion-justify-content-end">
+<ion-card class="course-card" *ngIf="course && course.courseName">
+  <ion-row *ngIf="isAdded" class="ion-justify-content-end">
     <ion-icon name="star" color="warning"></ion-icon>
   </ion-row>
   <ion-img
@@ -8,21 +8,58 @@
     class="course-card-image"
   ></ion-img>
   <ion-card-header>
-    <ion-card-title>Advanced Machine Learning</ion-card-title>
-    <ion-card-subtitle>by Alex Johnson</ion-card-subtitle>
+    <ion-card-title>{{ course.courseName }}</ion-card-title>
+    <ion-card-subtitle>by {{ course.author }}</ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content>
-    <strong><ion-label class="ion-margin-end">&#8377; 1199</ion-label></strong>
-    <ion-label class="strike-price">&#8377; 1199</ion-label>
-    <p>
-      <ion-chip color="warning">Machine Learning</ion-chip>
-      <ion-chip color="warning">Python</ion-chip>
+    <strong
+      ><ion-label class="ion-margin-end">
+        {{
+          discountedPrice ? "&#8377;" + discountedPrice : course.actualPrice
+        }}</ion-label
+      ></strong
+    >
+    <ion-label *ngIf="discountedPrice" class="strike-price">{{
+      course.actualPrice
+    }}</ion-label>
+    <p *ngIf="course.tags && course.tags.length">
+      <ion-chip *ngFor="let tag of course.tags" color="warning">{{
+        tag
+      }}</ion-chip>
     </p>
   </ion-card-content>
 
-  <ion-button fill="clear" size="small">Add To Cart</ion-button>
-  <ion-button fill="clear" size="small"> Add to Wishlist</ion-button>
+  <ion-button
+    *ngIf="where === 'course'"
+    fill="clear"
+    size="small"
+    (click)="addToCart()"
+    >Add To Cart</ion-button
+  >
+  <ion-button
+    *ngIf="where === 'cart'"
+    fill="clear"
+    size="small"
+    (click)="removeFromCart()"
+    >Delete</ion-button
+  >
+  <ion-button
+    *ngIf="where === 'course' || where === 'cart'"
+    fill="clear"
+    size="small"
+    (click)="addToWishlist()"
+  >
+    Add to Wishlist</ion-button
+  >
+  <ion-button
+    *ngIf="where === 'wishlist'"
+    fill="clear"
+    size="small"
+    (click)="removeFromWishlist()"
+  >
+    Remove From Wishlist</ion-button
+  >
   <ion-row class="ion-justify-content-end">
     <ion-button fill="clear" size="small" color="danger">
       <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>

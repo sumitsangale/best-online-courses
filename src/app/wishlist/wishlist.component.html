@@ -1,3 +1,16 @@
-<p>
-  wishlist works!
-</p>
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="wishLists?.length; else elseblock">
+      <app-course-card
+        *ngFor="let course of wishLists; let i = index"
+        [course]="course"
+        [index]="i"
+        [where]="'wishlist'"
+      ></app-course-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ng-template #elseblock>
+  <p>No Items in wishlists</p>
+</ng-template>

@@ -18,10 +18,16 @@
         ></ion-img>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="3">
-        <app-course-card></app-course-card>
-      </ion-col>
+    <ion-row
+      *ngIf="appService.courseData && appService.courseData.length"
+      class="ion-justify-content-evenly ion-padding-vertical"
+    >
+      <app-course-card
+        *ngFor="let course of appService.courseData; let i = index"
+        [course]="course"
+        [index]="i"
+        [where]="'course'"
+      ></app-course-card>
     </ion-row>
   </ion-grid>
 </ion-content>
