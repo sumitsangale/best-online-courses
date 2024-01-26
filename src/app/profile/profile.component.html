@@ -1,7 +1,12 @@
 <ion-content>
   <ion-grid class="profile-wrap">
     <ion-row>
-      <ion-col size="4"> Profile-photo </ion-col>
+      <ion-col size="4" class="ion-align-self-center">
+        <ion-img
+          class="profile-img"
+          src="assets/images/profile-icon.png"
+        ></ion-img>
+      </ion-col>
       <ion-col size-md="8">
         <h4 class="ion-text-center">Public Profile</h4>
         <form [formGroup]="profileFormGroup" class="profile-form">
@@ -96,33 +101,37 @@
               >
             </ion-radio-group>
           </div>
-          <div class="form-fields">
-            <ion-select
-              label="Experience"
-              labelPlacement="floating"
-              fill="outline"
-              placeholder="Select experience (yr)"
-              interface="popover"
-              formControlName="experience"
-            >
-              <ion-select-option value="junior">0-5</ion-select-option>
-              <ion-select-option value="midlevel">5-10</ion-select-option>
-              <ion-select-option value="senior">10 & above</ion-select-option>
-            </ion-select>
-          </div>
-          <div class="form-fields">
-            <ion-select
-              label="Expertise"
-              labelPlacement="floating"
-              fill="outline"
-              placeholder="Select expertise"
-              interface="popover"
-              formControlName="expertise"
-            >
-              <ion-select-option value="backend">Backend</ion-select-option>
-              <ion-select-option value="frontend">Frontend</ion-select-option>
-            </ion-select>
-          </div>
+          <ng-container
+            *ngIf="profileFormGroup.get('profession')?.value === 'professional'"
+          >
+            <div class="form-fields">
+              <ion-select
+                label="Experience"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Select experience (yr)"
+                interface="popover"
+                formControlName="experience"
+              >
+                <ion-select-option value="junior">0-5</ion-select-option>
+                <ion-select-option value="midlevel">5-10</ion-select-option>
+                <ion-select-option value="senior">10 & above</ion-select-option>
+              </ion-select>
+            </div>
+            <div class="form-fields">
+              <ion-select
+                label="Expertise"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Select expertise"
+                interface="popover"
+                formControlName="expertise"
+              >
+                <ion-select-option value="backend">Backend</ion-select-option>
+                <ion-select-option value="frontend">Frontend</ion-select-option>
+              </ion-select>
+            </div>
+          </ng-container>
           <div class="form-fields">
             <ion-textarea
               label="Role (Max char 200)"
