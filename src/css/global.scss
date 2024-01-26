@@ -47,5 +47,9 @@ body {
   .banner-section {
     min-height: calc(100vh - 60px);
     background-color: var(--lightyellow);
+    .baner-img {
+      max-width: 300px;
+      margin: 0 auto;
+    }
   }
 }
