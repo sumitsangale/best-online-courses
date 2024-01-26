@@ -2,3 +2,16 @@ ion-img.profile-img {
   width: 100px;
   margin: 0 auto;
 }
+ion-card.course-card {
+  .course-card-image {
+    max-width: 160px;
+    margin: 0 auto;
+  }
+  .strike-price {
+    text-decoration: line-through;
+  }
+}
+
+ion-button {
+  text-transform: capitalize;
+}

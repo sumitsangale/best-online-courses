@@ -42,3 +42,10 @@ body {
     }
   }
 }
+
+.dashboard-wrap {
+  .banner-section {
+    min-height: calc(100vh - 60px);
+    background-color: var(--lightyellow);
+  }
+}

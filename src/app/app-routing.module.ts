@@ -6,6 +6,7 @@ import { CartComponent } from './cart/cart.component';
 import { CoursesComponent } from './courses/courses.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProfileComponent } from './profile/profile.component';
+import { Error404Page } from 'src/shared';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: '**', component: Error404Page },
 ];
 
 @NgModule({

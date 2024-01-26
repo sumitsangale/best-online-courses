@@ -1,0 +1,22 @@
+<ion-content fullscreen="true">
+  <h1 *ngIf="!(error == 404)">{{ error }}</h1>
+  <div *ngIf="error == 400">
+    <p>Bad Request!</p>
+  </div>
+  <div *ngIf="error == 401">
+    <p>You don't have permission!</p>
+  </div>
+  <div *ngIf="error == 404">
+    <p class="explanation">404</p>
+    <p>The page requested could not be found on the server!</p>
+  </div>
+  <div *ngIf="error == 500">
+    <p>Internal Server Error!</p>
+  </div>
+  <div *ngIf="error == 403">
+    <p class="explanation">Forbidden</p>
+    <p>
+      You don't have permission to access requested resource on this server!
+    </p>
+  </div>
+</ion-content>
