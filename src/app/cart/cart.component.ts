@@ -20,7 +20,7 @@ export class CartComponent {
   ionViewWillEnter() {
     this.cartItems = this.appService.getCartItems();
 
-    this.apiService.currentAction.subscribe((resp) => {
+    this.sub = this.apiService.currentAction.subscribe((resp) => {
       if (resp.action === 'cart_updated') {
         this.cartItems = this.appService.getCartItems();
       }
