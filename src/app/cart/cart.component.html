@@ -1,3 +1,15 @@
+<ion-header class="ion-no-border" *ngIf="cartItems?.length">
+  <ion-row class="ion-padding ion-align-items-center ion-justify-content-end">
+    <ion-button size="small" (click)="checkout()">Checkout</ion-button>
+    <ion-label class="ion-margin-horizontal"
+      >Total value - &#8377; {{ appService.cartTotal }}</ion-label
+    >
+    |
+    <ion-label class="ion-margin-start"
+      >saving - &#8377; {{ appService.cartSaving }}</ion-label
+    >
+  </ion-row>
+</ion-header>
 <ion-content>
   <ion-grid>
     <ion-row *ngIf="cartItems?.length; else elseblock">

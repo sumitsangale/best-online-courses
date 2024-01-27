@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { AppService } from '../service/app.service';
-import { ApiService } from 'src/shared';
+import { ApiService, AlertService } from 'src/shared';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -9,7 +10,12 @@ import { ApiService } from 'src/shared';
 })
 export class CartComponent {
   cartItems: any;
-  constructor(public appService: AppService, public apiService: ApiService) {}
+  sub!: Subscription;
+  constructor(
+    public appService: AppService,
+    public apiService: ApiService,
+    public alertService: AlertService
+  ) {}
 
   ionViewWillEnter() {
     this.cartItems = this.appService.getCartItems();
@@ -19,5 +25,27 @@ export class CartComponent {
         this.cartItems = this.appService.getCartItems();
       }
     });
+  }
+
+  checkout() {
+    this.alertService.presentAlert(
+      'notifying',
+      'successful order placement!',
+      () => {
+        this.yesHandler();
+      },
+      null,
+      'ok'
+    );
+  }
+
+  yesHandler() {
+    this.appService.emptyCart();
+  }
+
+  ionViewWillLeave() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

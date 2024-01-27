@@ -8,6 +8,8 @@ export class AppService {
   courseData = [];
   cartItems: Record<string, any> = {};
   wishLists: Record<string, any> = {};
+  cartTotal: number = 0;
+  cartSaving: number = 0;
   constructor(public apiService: ApiService, public toast: ToastService) {}
 
   get(url: string) {
@@ -54,6 +56,8 @@ export class AppService {
       } cart successfully!`,
       'success'
     );
+    this.getCartTotal();
+    this.getCartSaving();
   }
 
   updateWishlist(course: any, action: string) {
@@ -74,11 +78,48 @@ export class AppService {
     );
   }
 
+  retnum(str: string) {
+    var num = str.replace(/[^0-9]/g, '');
+    return parseInt(num, 10);
+  }
+
   getCartItems() {
     return Object.values(this.cartItems);
   }
 
   getWishlist() {
     return Object.values(this.wishLists);
+  }
+
+  getCartTotal() {
+    this.cartTotal = Object.values(this.cartItems).reduce((acc, cur) => {
+      let price;
+      let actualPrice;
+      if (cur.discountPercentage) {
+        actualPrice = this.retnum(cur.actualPrice);
+        let discount = this.retnum(cur.discountPercentage);
+        price = Math.ceil(actualPrice - (actualPrice * discount) / 100);
+      } else {
+        price = actualPrice;
+      }
+
+      return (acc += price);
+    }, 0);
+    return this.cartTotal;
+  }
+
+  getCartSaving() {
+    let total = Object.values(this.cartItems).reduce((acc, cur) => {
+      let actualPrice = this.retnum(cur.actualPrice);
+
+      return (acc += actualPrice);
+    }, 0);
+    this.cartSaving = total - this.cartTotal;
+    return this.cartSaving;
+  }
+
+  emptyCart() {
+    this.cartItems = {};
+    this.apiService.sendAction({ action: 'cart_updated' });
   }
 }
