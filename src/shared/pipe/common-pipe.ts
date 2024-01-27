@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { CONFIG } from '../services/config';
 
 @Pipe({ name: 'formatDateTime' })
 export class FormatDateTimePipe implements PipeTransform {
@@ -12,6 +13,19 @@ export class FormatDateTimePipe implements PipeTransform {
       return `0 : ${minutes} : ${seconds} `;
     } else {
       return `0 : 0 : ${seconds} `;
+    }
+  }
+}
+
+@Pipe({ name: 'pagination' })
+export class PaginationPipe implements PipeTransform {
+  transform(value: any, page: number): any {
+    if (!value || !page) return;
+
+    let start = page * CONFIG.PER_PAGE - CONFIG.PER_PAGE;
+    let end = page * CONFIG.PER_PAGE;
+    if (page) {
+      return value.slice(start, end);
     }
   }
 }

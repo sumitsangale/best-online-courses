@@ -6,6 +6,7 @@ import { CONFIG } from 'src/shared/services/config';
 @Injectable()
 export class AppService {
   courseData = [];
+  filterData = [];
   cartItems: Record<string, any> = {};
   wishLists: Record<string, any> = {};
   cartTotal: number = 0;
@@ -31,6 +32,7 @@ export class AppService {
       this.get(CONFIG.endpoints.getCourseData).then(
         (resp: any) => {
           this.courseData = resp;
+          this.filterData = resp;
           resolve(resp);
         },
         (error) => {
@@ -116,6 +118,24 @@ export class AppService {
     }, 0);
     this.cartSaving = total - this.cartTotal;
     return this.cartSaving;
+  }
+
+  filterCourses(value: string) {
+    if (!value) {
+      this.filterData = this.courseData;
+      return;
+    }
+    value.toLowerCase();
+    this.filterData = this.courseData.filter((ele: any) => {
+      let isPresent = ele.tags.some((tag: any) =>
+        tag.toLowerCase().includes(value)
+      );
+      return (
+        ele.courseName.toLowerCase().includes(value) ||
+        ele.author.toLowerCase().includes(value) ||
+        isPresent
+      );
+    });
   }
 
   emptyCart() {

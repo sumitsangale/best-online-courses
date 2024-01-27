@@ -19,15 +19,40 @@
       </ion-col>
     </ion-row>
     <ion-row
-      *ngIf="appService.courseData && appService.courseData.length"
+      *ngIf="appService.filterData && appService.filterData.length"
       class="ion-justify-content-evenly ion-padding-vertical"
     >
       <app-course-card
-        *ngFor="let course of appService.courseData; let i = index"
+        *ngFor="
+          let course of appService.filterData | pagination : curentPage;
+          let i = index
+        "
         [course]="course"
         [index]="i"
         [where]="'course'"
       ></app-course-card>
+    </ion-row>
+    <ion-row
+      *ngIf="appService.filterData.length > perPage"
+      class="ion-padding-horizontal ion-justify-content-end ion-align-items-center"
+    >
+      <ion-button
+        size="small"
+        fill="clear"
+        (click)="prev()"
+        [disabled]="curentPage <= 1"
+      >
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <ion-label>{{ curentPage }}</ion-label>
+      <ion-button
+        size="small"
+        fill="clear"
+        (click)="next()"
+        [disabled]="appService.filterData.length / perPage < this.curentPage"
+      >
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>
