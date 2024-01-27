@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { CORE_DIRECTIVES } from './directives/index';
 import { CORE_COMPONENTS } from './component';
+import { CORE_PIPES } from './pipe';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { CORE_COMPONENTS } from './component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  declarations: [...CORE_DIRECTIVES, ...CORE_COMPONENTS],
+  declarations: [...CORE_DIRECTIVES, ...CORE_COMPONENTS, ...CORE_PIPES],
   exports: [
     CommonModule,
     FormsModule,
@@ -25,6 +26,8 @@ import { CORE_COMPONENTS } from './component';
     HttpClientModule,
     ...CORE_DIRECTIVES,
     ...CORE_COMPONENTS,
+    ...CORE_PIPES,
   ],
+  providers: CORE_PIPES,
 })
 export class SharedModule {}

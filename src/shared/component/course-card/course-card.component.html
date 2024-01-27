@@ -3,10 +3,17 @@
     <ion-icon name="star" color="warning"></ion-icon>
   </ion-row>
   <ion-img
+    *ngIf="where !== 'course-detail'"
     src="assets/images/course-icon1.png"
     alt="course-icon"
     class="course-card-image"
   ></ion-img>
+  <ng-container *ngIf="where === 'course-detail'">
+    <video width="400" controls>
+      <source src="assets/sample-video.mp4" type="video/mp4" />
+      Your browser does not support HTML video.
+    </video>
+  </ng-container>
   <ion-card-header>
     <ion-card-title>{{ course.courseName }}</ion-card-title>
     <ion-card-subtitle>by {{ course.author }}</ion-card-subtitle>
@@ -31,7 +38,7 @@
   </ion-card-content>
 
   <ion-button
-    *ngIf="where === 'course'"
+    *ngIf="where === 'course' || where === 'course-detail'"
     fill="clear"
     size="small"
     (click)="addToCart()"
@@ -45,7 +52,7 @@
     >Delete</ion-button
   >
   <ion-button
-    *ngIf="where === 'course' || where === 'cart'"
+    *ngIf="where === 'course' || where === 'cart' || where === 'course-detail'"
     fill="clear"
     size="small"
     (click)="addToWishlist()"
@@ -61,7 +68,19 @@
     Remove From Wishlist</ion-button
   >
   <ion-row class="ion-justify-content-end">
-    <ion-button fill="clear" size="small" color="danger">
+    <ion-label
+      *ngIf="where === 'course-detail' && discountedPrice"
+      color="warning"
+      class="ion-margin-end"
+      >Offer valid before {{ timer | formatDateTime }}</ion-label
+    >
+    <ion-button
+      *ngIf="where !== 'course-detail'"
+      fill="clear"
+      size="small"
+      color="danger"
+      (click)="goToCourseDetail()"
+    >
       <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
     </ion-button>
   </ion-row>

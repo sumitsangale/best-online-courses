@@ -1,3 +1,46 @@
-<p>
-  courses works!
-</p>
+<ion-content>
+  <ion-grid class="course-wrap">
+    <ion-row>
+      <ion-col size="12" class="course-baner">
+        <ion-breadcrumbs>
+          <ion-breadcrumb href="">All Courses</ion-breadcrumb>
+          <ion-breadcrumb>{{ courseDetails?.courseName }}</ion-breadcrumb>
+        </ion-breadcrumbs>
+
+        <h1 class="ion-text-center ion-padding-horizontal">
+          Discover Latest Courses on
+          {{ courseDetails?.courseName.split(" ")[0] }}
+        </h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col size="6" class="ion-padding-horizontal">
+        <h3>This course includes:</h3>
+        <ion-list>
+          <ion-item>
+            <ion-label>12 hours on-demand video</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>10 articles</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>50 downloadable resources</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Access on mobile and TV</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Certificate of completion</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="6" *ngIf="courseDetails">
+        <app-course-card
+          [course]="courseDetails"
+          [index]=""
+          [where]="'course-detail'"
+        ></app-course-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

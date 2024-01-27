@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AppService } from 'src/app/service/app.service';
 import { ApiService } from 'src/shared/services';
@@ -14,18 +16,31 @@ export class CourseCardComponent implements OnInit {
   @Input() where: any;
   discountedPrice: any;
   isAdded: boolean = false;
+  timer: any;
+  interval: any;
+  sub!: Subscription;
 
-  constructor(public appService: AppService, public apiService: ApiService) {}
+  constructor(
+    public appService: AppService,
+    public apiService: ApiService,
+    public router: Router
+  ) {}
 
   ngOnInit() {
     this.calculateDiscount();
-    this.apiService.currentAction.subscribe((resp) => {
+    this.sub = this.apiService.currentAction.subscribe((resp) => {
       if (resp.action === 'cart_updated') {
         this.appService.cartItems[this.course.courseName]
           ? (this.isAdded = true)
           : (this.isAdded = false);
       }
     });
+    if (this.discountedPrice) {
+      this.initDayEnd();
+      this.interval = setInterval(() => {
+        this.initDayEnd();
+      }, 1000);
+    }
   }
 
   calculateDiscount() {
@@ -59,5 +74,27 @@ export class CourseCardComponent implements OnInit {
 
   removeFromWishlist() {
     this.appService.updateWishlist(this.course, 'remove');
+  }
+
+  goToCourseDetail() {
+    this.router.navigate(['courses', this.course.courseName]);
+  }
+
+  initDayEnd() {
+    let now = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate(now.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    this.timer = (tomorrow.getTime() - now.getTime()) / 1000;
+  }
+
+  ionViewWillLeave() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

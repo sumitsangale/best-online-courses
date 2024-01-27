@@ -11,7 +11,7 @@ import { Error404Page } from 'src/shared';
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'courses', component: CoursesComponent },
+  { path: 'courses/:id', component: CoursesComponent },
   { path: 'cart', component: CartComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'profile', component: ProfileComponent },

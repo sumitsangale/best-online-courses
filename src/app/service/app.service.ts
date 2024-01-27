@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ApiService } from 'src/shared';
+import { ApiService, ToastService } from 'src/shared';
 import { CONFIG } from 'src/shared/services/config';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class AppService {
   courseData = [];
   cartItems: Record<string, any> = {};
   wishLists: Record<string, any> = {};
-  constructor(public apiService: ApiService) {}
+  constructor(public apiService: ApiService, public toast: ToastService) {}
 
   get(url: string) {
     return new Promise((resolve, reject) => {
@@ -48,6 +48,12 @@ export class AppService {
 
     console.log('cart item', this.cartItems);
     this.apiService.sendAction({ action: 'cart_updated' });
+    this.toast.showTop(
+      `course ${
+        action === 'add' ? 'added into' : 'removed from'
+      } cart successfully!`,
+      'success'
+    );
   }
 
   updateWishlist(course: any, action: string) {
@@ -60,6 +66,12 @@ export class AppService {
 
     console.log('wishlist item', this.wishLists);
     this.apiService.sendAction({ action: 'wishlist_updated' });
+    this.toast.showTop(
+      `course ${
+        action === 'add' ? 'added into' : 'removed from'
+      } wishlist successfully!`,
+      'success'
+    );
   }
 
   getCartItems() {
