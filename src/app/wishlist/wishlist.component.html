@@ -1,12 +1,18 @@
 <ion-content>
-  <ion-grid>
+  <ion-grid class="ion-padding">
     <ion-row *ngIf="wishLists?.length; else elseblock">
-      <app-course-card
+      <ion-col
         *ngFor="let course of wishLists; let i = index"
-        [course]="course"
-        [index]="i"
-        [where]="'wishlist'"
-      ></app-course-card>
+        size="12"
+        size-md="6"
+        class="ion-text-center"
+      >
+        <app-course-card
+          [course]="course"
+          [index]="i"
+          [where]="'wishlist'"
+        ></app-course-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

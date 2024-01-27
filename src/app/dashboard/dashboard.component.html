@@ -22,15 +22,21 @@
       *ngIf="appService.filterData && appService.filterData.length"
       class="ion-justify-content-evenly ion-padding-vertical"
     >
-      <app-course-card
+      <ion-col
         *ngFor="
           let course of appService.filterData | pagination : curentPage;
           let i = index
         "
-        [course]="course"
-        [index]="i"
-        [where]="'course'"
-      ></app-course-card>
+        size="12"
+        size-md="6"
+        class="ion-text-center"
+      >
+        <app-course-card
+          [course]="course"
+          [index]="i"
+          [where]="'course'"
+        ></app-course-card>
+      </ion-col>
     </ion-row>
     <ion-row
       *ngIf="appService.filterData.length > perPage"

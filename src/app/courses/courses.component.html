@@ -14,7 +14,7 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding">
-      <ion-col size="6" class="ion-padding-horizontal">
+      <ion-col size="12" size-md="6" class="ion-padding-horizontal">
         <h3>This course includes:</h3>
         <ion-list>
           <ion-item>
@@ -34,7 +34,7 @@
           </ion-item>
         </ion-list>
       </ion-col>
-      <ion-col size="6" *ngIf="courseDetails">
+      <ion-col size="12" size-md="6" *ngIf="courseDetails">
         <app-course-card
           [course]="courseDetails"
           [index]=""

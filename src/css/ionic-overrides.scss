@@ -3,7 +3,8 @@ ion-img.profile-img {
   margin: 0 auto;
 }
 ion-card.course-card {
-  width: 400px;
+  max-width: 400px;
+  margin: 10px auto;
   .course-card-image {
     max-width: 160px;
     margin: 0 auto;

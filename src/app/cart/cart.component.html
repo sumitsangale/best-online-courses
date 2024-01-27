@@ -13,12 +13,18 @@
 <ion-content>
   <ion-grid>
     <ion-row *ngIf="cartItems?.length; else elseblock">
-      <app-course-card
+      <ion-col
         *ngFor="let course of cartItems; let i = index"
-        [course]="course"
-        [index]="i"
-        [where]="'cart'"
-      ></app-course-card>
+        size="12"
+        size-md="6"
+        class="ion-text-center"
+      >
+        <app-course-card
+          [course]="course"
+          [index]="i"
+          [where]="'cart'"
+        ></app-course-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
