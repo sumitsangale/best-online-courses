@@ -140,6 +140,7 @@ export class AppService {
 
   emptyCart() {
     this.cartItems = {};
+    this.cartTotal = 0;
     this.apiService.sendAction({ action: 'cart_updated' });
   }
 }
